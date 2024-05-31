@@ -52,3 +52,20 @@ assets = [
 conf-files = ["/etc/openwec.conf.toml"]
 maintainer-scripts = "../build-pkg/debian/"
 systemd-units = { unit-name = "openwecd", enable = false }
+
+# cargo-generate-rpm
+[package.metadata.generate-rpm]
+name="openwec"
+maintainer = "CEA"
+copyright = "2023, CEA"
+summary = """\
+An implementation of a Windows Event Collector \
+server running on GNU/Linux."""
+#requires = ""
+assets = [
+    { source = "target/release/openwec", dest = "/usr/bin/openwec", mode = "0755" },
+    { source = "../openwec.conf.sample.toml", dest = "/etc/openwec.conf.toml", mode = "0644" },
+    { source = "../openwec.conf.sample.toml", dest = "/usr/share/doc/openwec/", mode = "0644" },
+    { source = "../README.md", dest = "/usr/share/doc/openwec/", mode = "0644" },
+    { source = "../doc/*", dest = "/usr/share/doc/openwec/doc/", mode = "0644" },
+]
